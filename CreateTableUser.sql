@@ -7,4 +7,4 @@ Create TABLE `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 
-Insert INTO `user` VALUES ('1', 'zhangsan', '20', 'shanghai,pudong');
+Insert INTO `user` VALUES ('1', 'summer', '100', 'shanghai,pudong');
