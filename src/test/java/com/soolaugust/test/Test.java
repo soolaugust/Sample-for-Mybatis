@@ -1,6 +1,7 @@
 package com.soolaugust.test;
 
 import java.io.Reader;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -27,15 +28,21 @@ public class Test {
       return sqlSessionFactory;
    }
    
-   public static void main(String[] args){
+   public void getUserList(String userName){
       SqlSession session = sqlSessionFactory.openSession();
       try{
          UserOperation userOperation = session.getMapper(UserOperation.class);
-         User user = userOperation.selectUserByID(1);
-         System.out.println(user.getUserAddress());
-         System.out.println(user.getUserName());
+         List<User> users = userOperation.selectUsers(userName);
+         for(User user:users){
+            System.out.println(user.getId()+":"+user.getUserName()+":"+user.getUserAddress());
+         }
       }finally{
          session.close();
       }
+   }
+   
+   public static void main(String[] args){
+      Test testUser = new Test();
+      testUser.getUserList("%");
    }
 }

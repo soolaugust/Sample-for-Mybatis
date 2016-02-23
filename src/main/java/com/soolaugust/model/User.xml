@@ -3,14 +3,14 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.soolaugust.inter.UserOperation">
-	<resultMap type="User" id=resultMap"">
+	<resultMap type="User" id="resultMap">
 		<id column="id" property="id"/>
 		<result column="userName" property="userName"/>
 		<result column="userAge" property="userAge"/>
-		<result column="userAddress" property="userAdderss"/>
+		<result column="userAddress" property="userAddress"/>
 	</resultMap>
 
-    <select id="selectUserByID" parameterType="String" resultMap="resultMap">
+    <select id="selectUsers" parameterType="String" resultMap="resultMap">
         select * from `user` where userName like #{userName}
     </select>
 </mapper>
