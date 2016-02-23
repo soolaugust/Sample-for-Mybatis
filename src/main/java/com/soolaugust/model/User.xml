@@ -9,8 +9,28 @@
 		<result column="userAge" property="userAge"/>
 		<result column="userAddress" property="userAddress"/>
 	</resultMap>
+	
+	<select id="selectUserByID" parameterType="int" resultType="User">
+		select * from `user` where id = #{id}
+	</select>
 
     <select id="selectUsers" parameterType="String" resultMap="resultMap">
         select * from `user` where userName like #{userName}
     </select>
+    
+    <!-- UseGeneratedKeys设置为true表明主键由数据库自动生成，keyProperty="id"表明将主键值注入到id属性中 -->
+    <!-- UseGeneratedKeys="true" means key is auto-set by database, keyProperty="id" means the value of key is setted as "id" -->
+    <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+    	insert into `user`(userName,userAge,userAddress)
+    		values(#{userName},#{userAge},#{userAddress})
+    </insert>
+    
+    <update id="updateUser" parameterType="User">
+    	update `user` set userName = #{userName},userAge = #{userAge},
+    		userAddress = #{userAddress} where id = #{id}
+    </update>
+    
+    <delete id="deleteUser" parameterType="int">
+    	delete from `user` where id = #{id}
+    </delete>
 </mapper>
