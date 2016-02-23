@@ -10,6 +10,13 @@
 		<result column="userAddress" property="userAddress"/>
 	</resultMap>
 	
+	<resultMap type="Article" id="resultUserArticleList">
+		<id property="id" column="aid"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<association property="user" javaType="User" resultMap="resultMap"></association>
+	</resultMap>
+	
 	<select id="selectUserByID" parameterType="int" resultType="User">
 		select * from `user` where id = #{id}
 	</select>
@@ -33,4 +40,10 @@
     <delete id="deleteUser" parameterType="int">
     	delete from `user` where id = #{id}
     </delete>
+    
+    <select id="getUserArticles" parameterType="int" resultMap="resultUserArticleList">
+    	select user.id,user.userName,user.userAddress,article.id aid,article.title,article.content from user,article
+    		where user.id = article.id and user.id = #{id}
+    </select>
+    
 </mapper>

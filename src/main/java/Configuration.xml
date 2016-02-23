@@ -4,7 +4,8 @@
 <configuration>
     <typeAliases> 
         <typeAlias alias="User" type="com.soolaugust.model.User"/> 
-    </typeAliases> 
+        <typeAlias alias="Article" type="com.soolaugust.model.Article"/>
+    </typeAliases>
 
     <environments default="development">
         <environment id="development">

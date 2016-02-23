@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.soolaugust.inter.UserOperation;
+import com.soolaugust.model.Article;
 import com.soolaugust.model.User;
 
 public class Test {
@@ -81,11 +82,27 @@ public class Test {
       }
    }
    
+   public void getUserArticles(int userid){
+      SqlSession session = sqlSessionFactory.openSession();
+      try{
+         UserOperation userOperation = session.getMapper(UserOperation.class);
+         List<Article> articles = userOperation.getUserArticles(userid);
+         for(Article article:articles){
+            System.out.println(article.getTitle() + ":" + article.getContent() +
+                  ":Author is " + article.getUser().getUserName() + ":Address is " +
+                  article.getUser().getUserAddress());
+         }
+      }finally{
+         session.close();
+      }
+   }
+   
    public static void main(String[] args){
       Test testUser = new Test();
 //      testUser.addUser();
 //      testUser.updateUser();
 //      testUser.deleteUser(3);
-      testUser.getUserList("%");
+//      testUser.getUserList("%");
+      testUser.getUserArticles(1);
    }
 }

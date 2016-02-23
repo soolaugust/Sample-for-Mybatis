@@ -2,6 +2,7 @@ package com.soolaugust.inter;
 
 import java.util.List;
 
+import com.soolaugust.model.Article;
 import com.soolaugust.model.User;
 
 public interface UserOperation {
@@ -10,4 +11,5 @@ public interface UserOperation {
    public void addUser(User user);
    public void updateUser(User user);
    public void deleteUser(int id);
+   public List<Article> getUserArticles(int id);
 }
