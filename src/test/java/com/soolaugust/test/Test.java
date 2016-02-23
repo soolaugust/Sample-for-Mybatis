@@ -41,8 +41,51 @@ public class Test {
       }
    }
    
+   public void addUser(){
+      User user = new User();
+      user.setUserAddress("People Square");
+      user.setUserName("autumn");
+      user.setUserAge(20);
+      SqlSession session = sqlSessionFactory.openSession();
+      try{
+         UserOperation userOperation = session.getMapper(UserOperation.class);
+         userOperation.addUser(user);
+         session.commit();
+         System.out.println("The id of new user is " + user.getId());
+      }finally{
+         session.close();
+      }
+   }
+   
+   public void updateUser(){
+      SqlSession session = sqlSessionFactory.openSession();
+      try{
+         UserOperation userOperation = session.getMapper(UserOperation.class);
+         User user = userOperation.selectUserByID(4);
+         user.setUserAddress("Beijing,sanlitun");
+         userOperation.updateUser(user);
+         session.commit();
+      }finally{
+         session.close();
+      }
+   }
+   
+   public void deleteUser(int id){
+      SqlSession session = sqlSessionFactory.openSession();
+      try{
+         UserOperation userOperation = session.getMapper(UserOperation.class);
+         userOperation.deleteUser(id);
+         session.commit();
+      }finally{
+         session.close();
+      }
+   }
+   
    public static void main(String[] args){
       Test testUser = new Test();
+//      testUser.addUser();
+//      testUser.updateUser();
+//      testUser.deleteUser(3);
       testUser.getUserList("%");
    }
 }
